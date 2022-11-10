@@ -1,0 +1,31 @@
+kind: PersistentVolumeClaim
+apiVersion: "v1"
+metadata:
+  name: "mongodb-pvc"
+  namespace: "rs-2"
+  labels:
+    app: "mongo-db"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: do-block-storage
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: mongodb-persistent-storage-2
+  namespace: rs-2
+  labels:
+    type: local
+    app: mongo-db
+spec:
+  storageClassName: do-block-storage
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: /data/mongo

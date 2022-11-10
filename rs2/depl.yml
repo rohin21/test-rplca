@@ -1,0 +1,43 @@
+apiVersion: "apps/v1"
+kind: "StatefulSet"
+metadata:
+  name: "mongo-db"
+  namespace: "rs-2"
+spec:
+  serviceName: "mongo-svc"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "mongo-db"
+  template:
+    metadata:
+      labels:
+        app: "mongo-db"
+    spec:
+      hostname: mongodb
+      containers:
+        - name: "mongo-db-rs2"
+          image: "mongo"
+          imagePullPolicy: "Always"
+          ports:
+            - containerPort: 27017
+              name: "mongodb"
+
+          volumeMounts:
+            - name: "mongodb-persistent-storage-2"
+              mountPath: "/data/db"
+            - name: "mongo-config"
+              mountPath: /etc/mongo
+            - name: "replica-secrets"
+              mountPath: /etc/key-file
+
+      volumes:
+        - name: "mongodb-persistent-storage-2"
+          persistentVolumeClaim:
+            claimName: "mongodb-pvc"
+        - name: "mongo-config"
+          configMap:
+            name: "mongo-config"
+        - name: "replica-secrets"
+          secret:
+            secretName: replica-secrets

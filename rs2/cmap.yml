@@ -1,0 +1,10 @@
+# my-mongo-config.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongo-config
+  namespace: rs-2
+data:
+  mongod.conf: |
+    security:
+      keyFile: /etc/key-file/keyfile.txt
