@@ -21,7 +21,7 @@ spec:
           imagePullPolicy: "Always"
           command:
             - mongod
-            - bind_ip_all
+            - --bind_ip_all
             - --replSet
             - rs0
           ports:
