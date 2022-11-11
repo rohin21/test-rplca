@@ -5,7 +5,7 @@ metadata:
   namespace: "primary"
 spec:
   serviceName: "mongo-svc"
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: "mongo-db"
@@ -21,6 +21,7 @@ spec:
           imagePullPolicy: "Always"
           command:
             - mongod
+            - bind_ip_all
             - --replSet
             - rs0
           ports:
@@ -29,14 +30,14 @@ spec:
           volumeMounts:
             - name: "mongodb-persistent-storage"
               mountPath: "/data/db"
-            - name: "mongo-config"
-              mountPath: /etc/mongo
+            # - name: "mongo-config"
+            #   mountPath: /etc/mongo
             - name: "replica-secrets"
               mountPath: /etc/key-file
       volumes:
-        - name: "mongo-config"
-          configMap:
-            name: "mongo-config"
+        # - name: "mongo-config"
+        #   configMap:
+        #     name: "mongo-config"
         - name: "replica-secrets"
           secret:
             secretName: replica-secrets
@@ -44,7 +45,7 @@ spec:
     - metadata:
         name: mongodb-persistent-storage
       spec:
-        storageClassName: do-block-storage
+        storageClassName: microk8s-hostpath
         accessModes:
           - ReadWriteOnce
         resources:

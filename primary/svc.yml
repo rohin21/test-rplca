@@ -8,8 +8,9 @@ metadata:
 spec:
   ports:
     - name: "mongodb"
-      port: 27017
+      port: 27018
       targetPort: 27017
-  clusterIP: "None"
+      nodePort: 30017
+  type: NodePort
   selector:
     app: "mongo-db"

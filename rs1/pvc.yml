@@ -11,21 +11,21 @@ spec:
   resources:
     requests:
       storage: 5Gi
-  storageClassName: do-block-storage
----
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: mongodb-persistent-storage-1
-  namespace: rs-1
-  labels:
-    type: local
-    app: mongo-db
-spec:
-  storageClassName: do-block-storage
-  capacity:
-    storage: 5Gi
-  accessModes:
-    - ReadWriteMany
-  hostPath:
-    path: /data/mongo
+  storageClassName: microk8s-hostpath
+# ---
+# kind: PersistentVolume
+# apiVersion: v1
+# metadata:
+#   name: mongodb-persistent-storage-1
+#   namespace: rs-1
+#   labels:
+#     type: local
+#     app: mongo-db
+# spec:
+#   storageClassName: do-block-storage
+#   capacity:
+#     storage: 5Gi
+#   accessModes:
+#     - ReadWriteMany
+#   hostPath:
+#     path: /data/mongo
