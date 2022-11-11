@@ -30,17 +30,17 @@ spec:
           volumeMounts:
             - name: "mongodb-persistent-storage-1"
               mountPath: "/data/db"
-            # - name: "mongo-config"
-            #   mountPath: /etc/mongo
+            - name: "mongo-config"
+              mountPath: /etc/mongo
             - name: "replica-secrets"
               mountPath: /etc/key-file
       volumes:
-        # - name: "mongodb-persistent-storage"
-        #   persistentVolumeClaim:
-        #     claimName: "mongodb-pvc"
-        # - name: "mongo-config"
-        #   configMap:
-        #     name: "mongo-config"
+        - name: "mongodb-persistent-storage"
+          persistentVolumeClaim:
+            claimName: "mongodb-pvc"
+        - name: "mongo-config"
+          configMap:
+            name: "mongo-config"
         - name: "replica-secrets"
           secret:
             secretName: replica-secrets
