@@ -20,6 +20,7 @@ spec:
           image: "mongo"
           imagePullPolicy: "Always"
           command:
+            - chmod 400 /etc/key-file/keyFile
             - mongod
             - --config
             - /etc/mongo/mongod.conf
