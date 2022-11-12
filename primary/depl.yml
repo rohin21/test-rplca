@@ -21,6 +21,8 @@ spec:
           imagePullPolicy: "Always"
           command:
             - mongod
+            - --config
+            - /etc/mongo/mongod.conf
             - --bind_ip_all
             - --replSet
             - rs0

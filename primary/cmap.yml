@@ -8,3 +8,9 @@ data:
   mongod.conf: |
     security:
       keyFile: /etc/key-file/keyfile.txt
+    net:
+      ssl:
+        mode: allowSSL
+        PEMKeyFile: /etc/key-file/mongodb.pem
+        CAFile: /etc/key-file/root-ca.pem
+        allowConnectionsWithoutCertificates: true

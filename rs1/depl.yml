@@ -21,6 +21,8 @@ spec:
           imagePullPolicy: "Always"
           command:
             - mongod
+            - --config
+            - /etc/mongo/mongod.conf
             - --bind_ip_all
             - --replSet
             - rs0
@@ -35,9 +37,9 @@ spec:
             - name: "replica-secrets"
               mountPath: /etc/key-file
       volumes:
-        - name: "mongodb-persistent-storage"
-          persistentVolumeClaim:
-            claimName: "mongodb-pvc"
+        # - name: "mongodb-persistent-storage"
+        #   persistentVolumeClaim:
+        #     claimName: "mongodb-pvc"
         - name: "mongo-config"
           configMap:
             name: "mongo-config"
