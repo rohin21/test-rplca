@@ -20,13 +20,13 @@ spec:
           image: "mongo"
           imagePullPolicy: "Always"
           command:
-            - chmod 400 /etc/key-file/keyFile
             - mongod
             - --config
             - /etc/mongo/mongod.conf
             - --bind_ip_all
             - --replSet
             - rs0
+            - chmod 400 /etc/key-file/keyFile
           ports:
             - containerPort: 27017
               name: "mongodb"
